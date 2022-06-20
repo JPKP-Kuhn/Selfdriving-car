@@ -17,7 +17,7 @@ class Sensor{
                 i/(this.rayCount-1)
             );
 
-            const star={x:this.car.x, y:this.car.y};
+            const start={x:this.car.x, y:this.car.y};
             const end={
                 x:this.car.x-
                     Math.sin(rayAngle)*this.rayLength,
