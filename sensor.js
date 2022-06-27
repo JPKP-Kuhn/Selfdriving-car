@@ -23,10 +23,10 @@ class Sensor{
         let touches=[];
 
         for(let i=0;i<roadBorders.length;i++){
-            const touch=getIntersecction(
+            const touch=getIntersection(
                 ray[0],
                 ray[1],
-                roadBorders[i][1],
+                roadBorders[i][0],
                 roadBorders[i][1]
             );
             if(touch){
