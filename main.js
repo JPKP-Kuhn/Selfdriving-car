@@ -9,6 +9,12 @@ const traffic=[
 ];
 
 animate();
+function generateRandomColor(){
+    var randomColor='#' +Math.floor(Math.random()* 16777215).toString(16);
+    return randomColor;
+}
+var fixcolor=generateRandomColor();
+var fixcolor2=generateRandomColor();
 
 function animate(){
     for(let i=0;i<traffic.length;i++){
@@ -23,9 +29,9 @@ function animate(){
 
     road.draw(ctx);
     for(let i=0;i<traffic.length;i++){
-        traffic[i].draw(ctx,"red")
+        traffic[i].draw(ctx,fixcolor);
     }
-    car.draw(ctx,"blue");
+    car.draw(ctx,generateRandomColor());
 
     ctx.restore();
     requestAnimationFrame(animate);
