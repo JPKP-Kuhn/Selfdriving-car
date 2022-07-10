@@ -1,9 +1,9 @@
 class NeuralNetwork{
-    constructor(neuroCounts){
+    constructor(neuronCounts){
         this.levels=[];
-        for(let i=0;i<neuroCounts.length-1;i++){
+        for(let i=0;i<neuronCounts.length-1;i++){
             this.levels.push(new Level(
-                neuroCounts[i],neuroCounts[i+1]
+                neuronCounts[i],neuronCounts[i+1]
             ));
         }
     }
@@ -20,10 +20,10 @@ class NeuralNetwork{
 }
 
 class Level{
-    construtctor(inputCount,outputCount){
+    constructor(inputCount,outputCount){
         this.inputs=new Array(inputCount);
         this.outputs=new Array(outputCount);
-        this.blasses=new Array(outputCount);
+        this.biases=new Array(outputCount);
 
         this.weights=[];
         for(let i=0;i<inputCount;i++){
@@ -41,14 +41,14 @@ class Level{
             }
         }
 
-        for(let i=0;i<level.blasses.length;i++){
-            level.blases[i]=Math.random()*2-1;
+        for(let i=0;i<level.biases.length;i++){
+            level.biases[i]=Math.random()*2-1;
         }
     }
 
     static feedForward(givenInputs,level){
         for(let i=0;i<level.inputs.length;i++){
-            level.inputs[i]=givenInput[i];
+            level.inputs[i]=givenInputs[i];
         }
 
         for(let i=0;i<level.outputs.length;i++){
