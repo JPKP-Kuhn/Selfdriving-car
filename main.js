@@ -39,6 +39,8 @@ function animate(){
     car.draw(carCtx,generateRandomColor());
 
     carCtx.restore();
+
+    Visualizer.drawNetwork(networkCtx,car.brain);
     requestAnimationFrame(animate);
 
 } 
