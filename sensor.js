@@ -10,9 +10,9 @@ class Sensor{
     }
 
     update(roadBorders,traffic){
-       this.#castRays();
-       this.readings=[];
-       for(let i=0;i<this.rays.length;i++){
+        this.#castRays();
+        this.readings=[];
+        for(let i=0;i<this.rays.length;i++){
             this.readings.push(
                 this.#getReading(
                     this.rays[i],
@@ -23,7 +23,7 @@ class Sensor{
         }
     }
 
-    #getReading(ray, roadBorders,traffic){
+    #getReading(ray,roadBorders,traffic){
         let touches=[];
 
         for(let i=0;i<roadBorders.length;i++){
@@ -35,7 +35,7 @@ class Sensor{
             );
             if(touch){
                 touches.push(touch);
-            }   
+            }
         }
 
         for(let i=0;i<traffic.length;i++){
@@ -61,7 +61,8 @@ class Sensor{
             return touches.find(e=>e.offset==minOffset);
         }
     }
-    #castRays(){ 
+
+    #castRays(){
         this.rays=[];
         for(let i=0;i<this.rayCount;i++){
             const rayAngle=lerp(
@@ -77,17 +78,17 @@ class Sensor{
                 y:this.car.y-
                     Math.cos(rayAngle)*this.rayLength
             };
-        this.rays.push([start,end]);
+            this.rays.push([start,end]);
         }
     }
-    
+
     draw(ctx){
         for(let i=0;i<this.rayCount;i++){
             let end=this.rays[i][1];
             if(this.readings[i]){
                 end=this.readings[i];
             }
-            
+
             ctx.beginPath();
             ctx.lineWidth=2;
             ctx.strokeStyle="yellow";
@@ -113,7 +114,6 @@ class Sensor{
                 end.y
             );
             ctx.stroke();
-              
         }
-    }
+    }        
 }

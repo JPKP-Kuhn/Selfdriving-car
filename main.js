@@ -1,7 +1,7 @@
 const carCanvas=document.getElementById("carCanvas");
 carCanvas.width=200;
 const networkCanvas=document.getElementById("networkCanvas");
-networkCanvas.width=300;    
+networkCanvas.width=300;
 
 const carCtx = carCanvas.getContext("2d");
 const networkCtx = networkCanvas.getContext("2d");
@@ -13,19 +13,13 @@ const traffic=[
 ];
 
 animate();
-function generateRandomColor(){
-    var randomColor='#' +Math.floor(Math.random()* 16777215).toString(16);
-    return randomColor;
-}
-var fixcolor=generateRandomColor();
-var fixcolor1=generateRandomColor();
 
-function animate(){
+function animate(time){
     for(let i=0;i<traffic.length;i++){
         traffic[i].update(road.borders,[]);
     }
     car.update(road.borders,traffic);
-    
+
     carCanvas.height=window.innerHeight;
     networkCanvas.height=window.innerHeight;
 
@@ -34,13 +28,13 @@ function animate(){
 
     road.draw(carCtx);
     for(let i=0;i<traffic.length;i++){
-        traffic[i].draw(carCtx,fixcolor);
+        traffic[i].draw(carCtx,"red");
     }
-    car.draw(carCtx,generateRandomColor());
+    car.draw(carCtx,"blue");
 
     carCtx.restore();
 
+    networkCtx.lineDashOffset=-time/50;
     Visualizer.drawNetwork(networkCtx,car.brain);
     requestAnimationFrame(animate);
-
-} 
+}

@@ -1,7 +1,7 @@
 class Car{
     constructor(x,y,width,height,controlType,maxSpeed=3){
         this.x=x;
-        this.y=y
+        this.y=y;
         this.width=width;
         this.height=height;
 
@@ -12,7 +12,7 @@ class Car{
         this.angle=0;
         this.damaged=false;
 
-        this.useBrain=controlType=="AI"
+        this.useBrain=controlType=="AI";
 
         if(controlType!="DUMMY"){
             this.sensor=new Sensor(this);
@@ -20,7 +20,6 @@ class Car{
                 [this.sensor.rayCount,6,4]
             );
         }
-
         this.controls=new Controls(controlType);
     }
 
@@ -33,7 +32,7 @@ class Car{
         if(this.sensor){
             this.sensor.update(roadBorders,traffic);
             const offsets=this.sensor.readings.map(
-               s=>s==null?0:1-s.offset  
+                s=>s==null?0:1-s.offset
             );
             const outputs=NeuralNetwork.feedForward(offsets,this.brain);
 
@@ -47,12 +46,12 @@ class Car{
     }
 
     #assessDamage(roadBorders,traffic){
-        for (let i=0;i<roadBorders.length;i++){
+        for(let i=0;i<roadBorders.length;i++){
             if(polysIntersect(this.polygon,roadBorders[i])){
                 return true;
             }
         }
-        for (let i=0;i<traffic.length;i++){
+        for(let i=0;i<traffic.length;i++){
             if(polysIntersect(this.polygon,traffic[i].polygon)){
                 return true;
             }
@@ -85,7 +84,7 @@ class Car{
 
     #move(){
         if(this.controls.forward){
-            this.speed+=this.acceleration; 
+            this.speed+=this.acceleration;
         }
         if(this.controls.reverse){
             this.speed-=this.acceleration;
@@ -110,7 +109,6 @@ class Car{
 
         if(this.speed!=0){
             const flip=this.speed>0?1:-1;
-        
             if(this.controls.left){
                 this.angle+=0.03*flip;
             }
@@ -123,10 +121,9 @@ class Car{
         this.y-=Math.cos(this.angle)*this.speed;
     }
 
-
     draw(ctx,color){
         if(this.damaged){
-            ctx.fillStyle=fixcolor;
+            ctx.fillStyle="gray";
         }else{
             ctx.fillStyle=color;
         }

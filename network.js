@@ -8,7 +8,7 @@ class NeuralNetwork{
         }
     }
 
-    static feedForward(givenInputs, network){
+    static feedForward(givenInputs,network){
         let outputs=Level.feedForward(
             givenInputs,network.levels[0]);
         for(let i=1;i<network.levels.length;i++){
@@ -31,7 +31,6 @@ class Level{
         }
 
         Level.#randomize(this);
-
     }
 
     static #randomize(level){
@@ -61,7 +60,7 @@ class Level{
                 level.outputs[i]=1;
             }else{
                 level.outputs[i]=0;
-            }
+            } 
         }
 
         return level.outputs;
